@@ -69,7 +69,7 @@ class TableHeadCell extends React.Component {
     /** Column displayed in print */
     print: PropTypes.bool.isRequired,
     /** Optional to be used with `textLabels.body.columnHeaderTooltip` */
-    column: PropTypes.object,
+    column: PropTypes.object
   };
 
   state = {
@@ -91,7 +91,7 @@ class TableHeadCell extends React.Component {
 
   render() {
     const { isSortTooltipOpen, isHintTooltipOpen } = this.state;
-    const { children, classes, options, sortDirection, sort, hint, print, column } = this.props;
+    const { children, classes, options, sortDirection, sort, hint, print, column, index } = this.props;
     const sortActive = sortDirection !== 'none' && sortDirection !== undefined ? true : false;
     const ariaSortDirection = sortDirection === 'none' ? false : sortDirection;
 
@@ -107,9 +107,8 @@ class TableHeadCell extends React.Component {
       [classes.fixedHeader]: options.fixedHeader,
       'datatables-noprint': !print,
     });
-
     return (
-      <TableCell className={cellClass} scope={'col'} sortDirection={ariaSortDirection}>
+      <TableCell align={index === 0 ? 'left' : 'right'} sortDirection={ariaSortDirection}>
         {options.sort && sort ? (
           <Tooltip
             title={
